@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Header from "../components/header";
+import Header from "../components/Header";
  
 export default function ServicePage() {
   const { id } = useParams(); // the :id from the URL /services/:id
