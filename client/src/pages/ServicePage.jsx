@@ -44,7 +44,7 @@ export default function ServicePage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ service_id: service.id }),
+        body: JSON.stringify({ serviceId: service.id }),
       });
       const data = await res.json();
  
