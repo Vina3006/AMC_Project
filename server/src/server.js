@@ -5,6 +5,10 @@ const pool = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const clientRoutes = require('./routes/clientRoutes');
+const assetRoutes = require('./routes/assetRoutes');
+const contractRoutes = require('./routes/contractRoutes');
+const ticketRoutes =require('./routes/ticketRoutes');
 const { verifyToken, requireRole } = require('./middleware/authMiddleware');
 
 const app = express();
@@ -24,6 +28,10 @@ app.get('/api/health', async (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/assets', assetRoutes);
+app.use('/api/contracts', contractRoutes);
+app.use('/api/tickets', ticketRoutes);
 
 app.get('/api/me', verifyToken, (req, res) => {
   res.json({ user: req.user });
