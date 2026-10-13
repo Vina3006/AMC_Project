@@ -4,15 +4,25 @@ import { getUser, logout, roleLabels } from "../utils/auth";
 // The menu for each role. Only pages that exist are listed.
 // When we build a new page, we add one line here.
 const menus = {
-  admin: [{ to: "/dashboard", label: "Dashboard" }],
-  staff: [{ to: "/dashboard", label: "Dashboard" }],
-  technician: [{ to: "/dashboard", label: "Dashboard" }],
+  admin: [
+    { to: "/dashboard", label: "Dashboard" },
+    { to: "/tickets", label: "Tickets" },
+  ],
+  staff: [
+    { to: "/dashboard", label: "Dashboard" },
+    { to: "/tickets", label: "Tickets" },
+  ],
+  technician: [
+    { to: "/dashboard", label: "Dashboard" },
+    { to: "/tickets", label: "My tickets" },
+  ],
   customer: [
     { to: "/dashboard", label: "Dashboard" },
+    { to: "/tickets", label: "My tickets" },
+    { to: "/tickets/new", label: "Raise a ticket" },
     { to: "/invoices", label: "My invoices" },
   ],
 };
- 
 export default function DashboardLayout() {
   const navigate = useNavigate();
   const user = getUser();

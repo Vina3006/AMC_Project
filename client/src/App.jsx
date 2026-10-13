@@ -6,6 +6,11 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import Invoices from './pages/Invoices';
+import Tickets from './pages/Tickets';
+import NewTicket from './pages/NewTicket';
+import TicketDetails from './pages/TicketDetail';
+
+
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-100">
@@ -17,6 +22,16 @@ export default function App() {
   <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/invoices" element={<Invoices />} />
+    <Route path="/tickets" element={<Tickets />} />
+    <Route
+  path="/tickets/new"
+  element={
+    <ProtectedRoute roles={["customer", "admin", "staff"]}>
+      <NewTicket />
+    </ProtectedRoute>
+  }
+/>
+<Route path="/tickets/:id" element={<TicketDetails />} />
   </Route>
 </Routes>
     </div>

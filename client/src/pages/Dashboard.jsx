@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { request } from "../utils/request";
 import { getUser, roleLabels } from "../utils/auth";
- 
+import {Link} from "react-router-dom";
 // Which numbers to show for each role. "key" is the field name from GET /api/dashboard.
 // danger = turn red when the value is above 0, warn = turn amber.
 const cardsByRole = {
@@ -159,7 +159,11 @@ export default function Dashboard() {
               <tbody>
                 {tickets.map((t) => (
                   <tr key={t.id} className="border-b border-slate-100 last:border-0">
-                    <td className="px-4 py-3 font-medium">{t.ticket_number}</td>
+                   <td className="px-4 py-3 font-medium">
+  <Link to={`/tickets/${t.id}`} className="text-[#0b4a34] hover:underline">
+    {t.ticket_number}
+  </Link>
+</td>
                     <td className="px-4 py-3">{t.title}</td>
                     <td className="px-4 py-3">{t.asset_type}</td>
                     <td className="px-4 py-3 capitalize">{t.priority}</td>
