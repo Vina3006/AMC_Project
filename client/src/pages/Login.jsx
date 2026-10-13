@@ -60,7 +60,7 @@ export default function Login() {
         // Login worked: save the token, then go back where the user came from.
         localStorage.setItem("token", data.token);
         if (data.user) localStorage.setItem("user", JSON.stringify(data.user));
-        navigate(returnTo, { replace: true });
+        navigate(returnTo === "/" ? "/dashboard" : returnTo,{ replace: true });
       }
     } catch {
       setError("Could not reach the server.");

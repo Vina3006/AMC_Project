@@ -9,6 +9,11 @@ const clientRoutes = require('./routes/clientRoutes');
 const assetRoutes = require('./routes/assetRoutes');
 const contractRoutes = require('./routes/contractRoutes');
 const ticketRoutes =require('./routes/ticketRoutes');
+const visitRoutes = require('./routes/visitRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
+
+
+
 const { verifyToken, requireRole } = require('./middleware/authMiddleware');
 
 const app = express();
@@ -32,6 +37,10 @@ app.use('/api/clients', clientRoutes);
 app.use('/api/assets', assetRoutes);
 app.use('/api/contracts', contractRoutes);
 app.use('/api/tickets', ticketRoutes);
+app.use('/api/visits', visitRoutes);
+app.use('/api/dashboard',dashboardRoutes);
+
+
 
 app.get('/api/me', verifyToken, (req, res) => {
   res.json({ user: req.user });

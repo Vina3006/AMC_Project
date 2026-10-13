@@ -9,6 +9,7 @@ const {
   updateTicketStatus,
   getAssetHistory,
   getTechnicians,
+  getTicketHistory,
 } = require('../controllers/ticketController');
  
 // Fixed-word paths must come BEFORE '/:id', or Express reads the word as an id.
@@ -18,6 +19,8 @@ router.get('/asset/:assetId', verifyToken, requireRole('admin', 'staff', 'techni
 router.post('/', verifyToken, requireRole('customer', 'admin', 'staff'), createTicket);
 router.get('/', verifyToken, requireRole('admin', 'staff', 'technician', 'customer'), getTickets);
 router.get('/:id', verifyToken, requireRole('admin', 'staff', 'technician', 'customer'), getTicketById);
+ 
+router.get('/:id/history', verifyToken, requireRole('admin', 'staff', 'technician', 'customer'), getTicketHistory);
  
 router.put('/:id/assign', verifyToken, requireRole('admin', 'staff'), assignTicket);
 router.put('/:id/status', verifyToken, requireRole('admin', 'staff', 'technician', 'customer'), updateTicketStatus);

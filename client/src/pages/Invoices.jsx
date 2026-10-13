@@ -37,10 +37,10 @@ export default function Invoices() {
   }
  
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
-      <Header />
+    <div className=" text-slate-800">
+     
  
-      <main className="mx-auto max-w-5xl px-6 py-10">
+      <main className="max-w-5x1">
         <h1 className="text-2xl font-bold text-slate-900">My invoices</h1>
         <p className="mt-1 text-sm text-slate-600">
           Payments you have made for AMC services.

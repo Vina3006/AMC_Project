@@ -1,4 +1,5 @@
 const pool = require('../config/db');
+const { logHistory } = require('../utils/history');
  
 // ---- SLA settings: hours allowed to resolve a ticket, by priority ----
 // Change these numbers in ONE place if your SRS says something different.
@@ -81,6 +82,8 @@ exports.createTicket = async (req, res) => {
       [asset.client_id, asset_id, contracts[0].id, req.user.id,
        title, description || null, ticketPriority, slaHours]
     );
+ 
+    await logHistory(pool, result.insertId, req.user.id, 'created', null, 'open', `Priority: ${ticketPriority}`);
  
     res.status(201).json({
       message: 'Ticket created',
@@ -181,6 +184,7 @@ exports.assignTicket = async (req, res) => {
       "UPDATE tickets SET assigned_to = ?, status = 'assigned' WHERE id = ?",
       [technician_id, req.params.id]
     );
+    await logHistory(pool, req.params.id, req.user.id, 'assigned', tickets[0].status, 'assigned', `Technician id ${technician_id}`);
     res.json({ message: 'Ticket assigned' });
   } catch (err) {
     console.error(err);
@@ -231,6 +235,7 @@ exports.updateTicketStatus = async (req, res) => {
        WHERE id = ?`,
       [status, status, req.params.id]
     );
+    await logHistory(pool, req.params.id, req.user.id, 'status_changed', ticket.status, status, null);
     res.json({ message: `Ticket marked as ${status}` });
   } catch (err) {
     console.error(err);
@@ -274,6 +279,40 @@ exports.getTechnicians = async (req, res) => {
        FROM users u
        WHERE u.role = 'technician'
        ORDER BY u.name`
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+ 
+// GET /api/tickets/:id/history   -> the audit trail of one ticket
+exports.getTicketHistory = async (req, res) => {
+  try {
+    const [tickets] = await pool.query('SELECT id, client_id, assigned_to FROM tickets WHERE id = ?', [req.params.id]);
+    if (tickets.length === 0) {
+      return res.status(404).json({ message: 'Ticket not found' });
+    }
+    const ticket = tickets[0];
+ 
+    if (req.user.role === 'customer') {
+      const clientId = await getClientIdForUser(req.user.id);
+      if (ticket.client_id !== clientId) {
+        return res.status(403).json({ message: 'This ticket does not belong to you' });
+      }
+    }
+    if (req.user.role === 'technician' && ticket.assigned_to !== req.user.id) {
+      return res.status(403).json({ message: 'This ticket is not assigned to you' });
+    }
+ 
+    const [rows] = await pool.query(
+      `SELECT h.id, h.action, h.old_status, h.new_status, h.note, h.created_at, u.name AS changed_by
+       FROM ticket_history h
+       LEFT JOIN users u ON u.id = h.changed_by
+       WHERE h.ticket_id = ?
+       ORDER BY h.created_at, h.id`,
+      [req.params.id]
     );
     res.json(rows);
   } catch (err) {

@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
- 
+import {getUser,logout as clearLogin} from "../utils/auth";
 // Shared header used on every page.
 export default function Header() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = getUser();
+
  
   function logout() {
-    localStorage.removeItem("token");
+    clearLogin();
     navigate("/");
   }
  
@@ -21,7 +22,7 @@ export default function Header() {
         <nav className="flex items-center gap-6 text-sm">
           <Link to="/" className="text-slate-700 hover:text-[#0b4a34]">Home</Link>
           {token && (
-            <Link to="/invoices" className="text-slate-700 hover:text-[#0b4a34]">My invoices</Link>
+            <Link to="/dashboard" className="text-slate-700 hover:text-[#0b4a34]">My Dashboard</Link>
           )}
           {token ? (
             <button
