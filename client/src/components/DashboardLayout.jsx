@@ -11,6 +11,7 @@ const menus = {
     { to: "/assets", label: "Assets" },
     { to: "/contracts", label: "Contracts" },
     { to: "/users", label: "Users" },
+    { to: "/invoices", label: "Invoices" },
   ],
   staff: [
     { to: "/dashboard", label: "Dashboard" },
@@ -18,6 +19,7 @@ const menus = {
     { to: "/clients", label: "Clients" },
     { to: "/assets", label: "Assets" },
     { to: "/contracts", label: "Contracts" },
+    { to: "/invoices", label: "Invoices" },
   ],
   technician: [
     { to: "/dashboard", label: "Dashboard" },
@@ -45,7 +47,7 @@ export default function DashboardLayout() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 text-slate-800 md:flex-row">
       {/* Sidebar (becomes a top strip on phones) */}
-      <aside className="flex flex-col bg-[#0b3d2e] text-white md:min-h-screen md:w-60 md:shrink-0">
+      <aside className="print:hidden flex flex-col bg-[#0b3d2e] text-white md:min-h-screen md:w-60 md:shrink-0">
         <Link to="/" className="block px-6 py-5 leading-tight">
           <p className="text-lg font-bold">Divine Grace</p>
           <p className="text-xs text-slate-300">AMC System</p>
@@ -81,7 +83,7 @@ export default function DashboardLayout() {
       {/* The page content goes here */}
       <main className="flex-1 p-6 md:p-8">
         {/* Logout for phones, where the sidebar footer is hidden */}
-        <div className="mb-4 flex justify-end md:hidden">
+        <div className=" print:hidden mb-4 flex justify-end md:hidden">
           <button
             onClick={handleLogout}
             className="rounded-md border border-slate-300 px-3 py-1.5 text-sm"

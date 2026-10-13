@@ -11,6 +11,8 @@ const styles = {
   expired: "bg-amber-100 text-amber-800",
   under_repair: "bg-amber-100 text-amber-800",
   retired: "bg-slate-200 text-slate-700",
+  paid: "bg-green-100 text-green-800",
+  unpaid: "bg-amber-100 text-amber-800",
 };
  
 export default function StatusBadge({ status }) {
@@ -24,4 +26,3 @@ export default function StatusBadge({ status }) {
     </span>
   );
 }
- 

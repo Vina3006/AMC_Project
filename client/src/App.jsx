@@ -3,7 +3,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import ServicePage from './pages/ServicePage';
 import ProtectedRoute from './components/ProtectedRoute';
-import DashboardLayout from './components/DashboardLayout';
+import DashboardLayout from './components/Dashboardlayout';
 import Dashboard from './pages/Dashboard';
 import Invoices from './pages/Invoices';
 import Tickets from './pages/Tickets';
@@ -13,7 +13,7 @@ import Users from './pages/Users';
 import Clients from './pages/Clients';
 import Assets from './pages/Assets';
 import Contracts from './pages/Contracts';
-
+import InvoiceDetail from './pages/InvoiceDetail';
 
 
 
@@ -33,7 +33,8 @@ export default function App() {
 
   <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
     <Route path="/dashboard" element={<Dashboard />} />
-    <Route path="/invoices" element={<Invoices />} />
+    <Route path="/invoices" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Invoices /></ProtectedRoute>} />
+<Route path="/invoices/:id" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><InvoiceDetail /></ProtectedRoute>} />
     <Route path="/tickets" element={<Tickets />} />
     <Route path="/clients" element={<ProtectedRoute roles={["admin", "staff"]}><Clients /></ProtectedRoute>} />
 <Route path="/assets" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Assets /></ProtectedRoute>} />
