@@ -11,7 +11,7 @@ const contractRoutes = require('./routes/contractRoutes');
 const ticketRoutes =require('./routes/ticketRoutes');
 const visitRoutes = require('./routes/visitRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
-
+const userRoutes = require('./routes/userRoutes');
 
 
 const { verifyToken, requireRole } = require('./middleware/authMiddleware');
@@ -39,7 +39,7 @@ app.use('/api/contracts', contractRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/visits', visitRoutes);
 app.use('/api/dashboard',dashboardRoutes);
-
+app.use('/api/users', userRoutes);
 
 
 app.get('/api/me', verifyToken, (req, res) => {

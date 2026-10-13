@@ -1,11 +1,44 @@
 const pool = require('../config/db');
  
+// Checks the client fields. Returns a message when something is wrong, otherwise null.
+async function validateClient(body, clientId) {
+  const { phone, email, user_id } = body;
+  try {
+    if (phone && !/^\d{10}$/.test(phone)) {
+      return 'phone must be exactly 10 digits';
+    }
+    if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+      return 'email is not valid';
+    }
+    if (user_id) {
+      const [users] = await pool.query('SELECT role FROM users WHERE id = ?', [user_id]);
+      if (users.length === 0) return 'The chosen login account does not exist';
+      if (users[0].role !== 'customer') return 'Only customer accounts can be linked to a client';
+ 
+      const [taken] = await pool.query(
+        'SELECT id FROM clients WHERE user_id = ? AND id <> ?',
+        [user_id, clientId || 0]
+      );
+      if (taken.length > 0) return 'This login is already linked to another client';
+    }
+    return null;
+  } catch (err) {
+    console.error(err);
+    return 'Could not validate the request';
+  }
+}
+ 
 // POST /api/clients   (admin, staff) -> create a client
 exports.createClient = async (req, res) => {
   const { name, contact_person, phone, email, address, user_id } = req.body;
  
   if (!name) {
     return res.status(400).json({ message: 'name is required' });
+  }
+ 
+  const problem = await validateClient(req.body, req.params.id);
+  if (problem) {
+    return res.status(400).json({ message: problem });
   }
  
   try {
@@ -71,6 +104,11 @@ exports.updateClient = async (req, res) => {
  
   if (!name) {
     return res.status(400).json({ message: 'name is required' });
+  }
+ 
+  const problem = await validateClient(req.body, req.params.id);
+  if (problem) {
+    return res.status(400).json({ message: problem });
   }
  
   try {

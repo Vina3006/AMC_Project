@@ -9,6 +9,18 @@ import Invoices from './pages/Invoices';
 import Tickets from './pages/Tickets';
 import NewTicket from './pages/NewTicket';
 import TicketDetails from './pages/TicketDetail';
+import Users from './pages/Users';
+import Clients from './pages/Clients';
+import Assets from './pages/Assets';
+import Contracts from './pages/Contracts';
+
+
+
+
+
+
+
+
 
 
 export default function App() {
@@ -23,6 +35,10 @@ export default function App() {
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/invoices" element={<Invoices />} />
     <Route path="/tickets" element={<Tickets />} />
+    <Route path="/clients" element={<ProtectedRoute roles={["admin", "staff"]}><Clients /></ProtectedRoute>} />
+<Route path="/assets" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Assets /></ProtectedRoute>} />
+<Route path="/contracts" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Contracts /></ProtectedRoute>} />
+<Route path="/users" element={<ProtectedRoute roles={["admin"]}><Users /></ProtectedRoute>} />
     <Route
   path="/tickets/new"
   element={

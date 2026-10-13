@@ -7,10 +7,17 @@ const menus = {
   admin: [
     { to: "/dashboard", label: "Dashboard" },
     { to: "/tickets", label: "Tickets" },
+    { to: "/clients", label: "Clients" },
+    { to: "/assets", label: "Assets" },
+    { to: "/contracts", label: "Contracts" },
+    { to: "/users", label: "Users" },
   ],
   staff: [
     { to: "/dashboard", label: "Dashboard" },
     { to: "/tickets", label: "Tickets" },
+    { to: "/clients", label: "Clients" },
+    { to: "/assets", label: "Assets" },
+    { to: "/contracts", label: "Contracts" },
   ],
   technician: [
     { to: "/dashboard", label: "Dashboard" },
@@ -20,6 +27,8 @@ const menus = {
     { to: "/dashboard", label: "Dashboard" },
     { to: "/tickets", label: "My tickets" },
     { to: "/tickets/new", label: "Raise a ticket" },
+    { to: "/assets", label: "My assets" },
+    { to: "/contracts", label: "My contracts" },
     { to: "/invoices", label: "My invoices" },
   ],
 };
