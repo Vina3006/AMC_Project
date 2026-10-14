@@ -14,7 +14,7 @@ import Clients from './pages/Clients';
 import Assets from './pages/Assets';
 import Contracts from './pages/Contracts';
 import InvoiceDetail from './pages/InvoiceDetail';
-
+import Reports from './pages/Reports';
 
 
 
@@ -36,6 +36,7 @@ export default function App() {
     <Route path="/invoices" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Invoices /></ProtectedRoute>} />
 <Route path="/invoices/:id" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><InvoiceDetail /></ProtectedRoute>} />
     <Route path="/tickets" element={<Tickets />} />
+    <Route path="/reports" element={<ProtectedRoute roles={["admin", "staff"]}><Reports /></ProtectedRoute>} />
     <Route path="/clients" element={<ProtectedRoute roles={["admin", "staff"]}><Clients /></ProtectedRoute>} />
 <Route path="/assets" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Assets /></ProtectedRoute>} />
 <Route path="/contracts" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Contracts /></ProtectedRoute>} />

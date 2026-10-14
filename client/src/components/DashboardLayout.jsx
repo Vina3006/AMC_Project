@@ -4,23 +4,25 @@ import { getUser, logout, roleLabels } from "../utils/auth";
 // The menu for each role. Only pages that exist are listed.
 // When we build a new page, we add one line here.
 const menus = {
-  admin: [
-    { to: "/dashboard", label: "Dashboard" },
-    { to: "/tickets", label: "Tickets" },
-    { to: "/clients", label: "Clients" },
-    { to: "/assets", label: "Assets" },
-    { to: "/contracts", label: "Contracts" },
-    { to: "/users", label: "Users" },
-    { to: "/invoices", label: "Invoices" },
-  ],
-  staff: [
-    { to: "/dashboard", label: "Dashboard" },
-    { to: "/tickets", label: "Tickets" },
-    { to: "/clients", label: "Clients" },
-    { to: "/assets", label: "Assets" },
-    { to: "/contracts", label: "Contracts" },
-    { to: "/invoices", label: "Invoices" },
-  ],
+ admin: [
+  { to: "/dashboard", label: "Dashboard" },
+  { to: "/tickets", label: "Tickets" },
+  { to: "/clients", label: "Clients" },
+  { to: "/assets", label: "Assets" },
+  { to: "/contracts", label: "Contracts" },
+  { to: "/invoices", label: "Invoices" },
+  { to: "/reports", label: "Reports" },
+  { to: "/users", label: "Users" },
+],
+staff: [
+  { to: "/dashboard", label: "Dashboard" },
+  { to: "/tickets", label: "Tickets" },
+  { to: "/clients", label: "Clients" },
+  { to: "/assets", label: "Assets" },
+  { to: "/contracts", label: "Contracts" },
+  { to: "/invoices", label: "Invoices" },
+  { to: "/reports", label: "Reports" },
+],
   technician: [
     { to: "/dashboard", label: "Dashboard" },
     { to: "/tickets", label: "My tickets" },

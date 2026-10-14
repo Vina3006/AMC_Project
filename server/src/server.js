@@ -13,7 +13,7 @@ const visitRoutes = require('./routes/visitRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const userRoutes = require('./routes/userRoutes');
 const invoiceRoutes = require('./routes/invoiceRoutes');
-
+const reportRoutes = require('./routes/reportRoutes');
 const { verifyToken, requireRole } = require('./middleware/authMiddleware');
 
 const app = express();
@@ -41,7 +41,7 @@ app.use('/api/visits', visitRoutes);
 app.use('/api/dashboard',dashboardRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/invoices', invoiceRoutes);
-
+app.use('/api/reports', reportRoutes);
 app.get('/api/me', verifyToken, (req, res) => {
   res.json({ user: req.user });
 });
