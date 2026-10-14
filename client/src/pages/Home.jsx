@@ -176,7 +176,7 @@ export default function Home() {
             {services.map((service) => (
               <div
                 key={service.id}
-                className="flex flex-col rounded-md border border-slate-200 bg-white p-6"
+                className="flex flex-col rounded-md border border-slate-200 bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-[#0b4a34]/40 hover:shadow-lg"
               >
                 <span className="text-[#0b4a34]">{serviceIcon(service.name)}</span>
                 <h3 className="mt-4 text-lg font-semibold text-slate-900">{service.name}</h3>

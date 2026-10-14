@@ -50,7 +50,7 @@ function StatCard({ card, value }) {
   if (card.warn && number > 0) color = "text-amber-600";
  
   return (
-    <div className="rounded-md border border-slate-200 bg-white p-5">
+    <div className="rounded-md border border-slate-200 bg-white p-5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <p className="text-sm text-slate-500">{card.label}</p>
       <p className={`mt-1 text-2xl font-bold ${color}`}>
         {card.money ? `₹${number.toLocaleString("en-IN")}` : number}

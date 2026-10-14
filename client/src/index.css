@@ -1,1 +1,31 @@
 @import "tailwindcss";
+@layer base {
+  /* pointer cursor on everything clickable */
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  select,
+  summary {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  /* smooth changes instead of sudden jumps */
+  a, button, input, select, textarea {
+    transition: color 0.15s ease, background-color 0.15s ease,
+      border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+
+  /* a soft green ring when a field is selected */
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0b4a34;
+    box-shadow: 0 0 0 3px rgba(11, 74, 52, 0.18);
+  }
+
+  /* table rows light up under the mouse */
+  tbody tr:hover {
+    background-color: #f1f5f9;
+  }
+}
