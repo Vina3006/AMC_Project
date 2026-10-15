@@ -12,6 +12,8 @@ const menus = {
   { to: "/contracts", label: "Contracts" },
   { to: "/invoices", label: "Invoices" },
   { to: "/reports", label: "Reports" },
+  { to: "/manage-services", label: "Services" },
+  { to: "/messages", label: "Messages" },
   { to: "/users", label: "Users" },
 ],
 staff: [
@@ -22,6 +24,7 @@ staff: [
   { to: "/contracts", label: "Contracts" },
   { to: "/invoices", label: "Invoices" },
   { to: "/reports", label: "Reports" },
+  { to: "/messages", label: "Messages" },
 ],
   technician: [
     { to: "/dashboard", label: "Dashboard" },

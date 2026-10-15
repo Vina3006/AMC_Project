@@ -21,6 +21,8 @@ export default function Header() {
  
         <nav className="flex items-center gap-6 text-sm">
           <Link to="/" className="text-slate-700 hover:text-[#0b4a34]">Home</Link>
+          <a href="/#services" className="text-slate-700 hover:text-[#0b4a34]">Services</a>
+<Link to="/contact" className="text-slate-700 hover:text-[#0b4a34]">Contact</Link>
           {token && (
             <Link to="/dashboard" className="text-slate-700 hover:text-[#0b4a34]">My Dashboard</Link>
           )}
