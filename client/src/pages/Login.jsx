@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import PasswordInput from "../components/PasswordInput";
 import { Field, inputClass, buttonClass } from "../components/ui";
 import { passwordRules, validatePassword } from "../utils/passwordRules";
- 
+ const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 // One page for both Login and Register. "mode" decides which form is shown.
 export default function Login() {
   const navigate = useNavigate();
@@ -48,8 +48,8 @@ export default function Login() {
     setLoading(true);
  
     const url = isRegister
-      ? "http://localhost:5000/api/auth/register"
-      : "http://localhost:5000/api/auth/login";
+      ? `${API}/api/auth/register`
+      : `${API}/api/auth/login`;
  
     const body = isRegister
       ? {

@@ -4,3 +4,6 @@ node_modules/
 !.env.example
 dist/
 *.log
+backup_before_batch2.sql
+database/backup_*.sql
+database/full_dump*.sql

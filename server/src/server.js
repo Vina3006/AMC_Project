@@ -8,7 +8,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const assetRoutes = require('./routes/assetRoutes');
 const contractRoutes = require('./routes/contractRoutes');
-const ticketRoutes =require('./routes/ticketRoutes');
+const ticketRoutes = require('./routes/ticketRoutes');
 const visitRoutes = require('./routes/visitRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -18,13 +18,29 @@ const { verifyToken, requireRole } = require('./middleware/authMiddleware');
 const contactRoutes = require('./routes/contactRoutes');
 const maintenanceRoutes = require('./routes/maintenanceRoutes');
 const { startScheduler } = require('./services/maintenanceService');
-
+ 
 startScheduler();
-
+ 
 const app = express();
-app.use(cors());
+ 
+// The hosting service sits in front of the server. This makes req.ip show the visitor's address.
+app.set('trust proxy', 1);
+ 
+// Which websites may call this API. Locally (no setting) everything is allowed.
+// On the host, set CORS_ORIGIN to your frontend address, for example https://amc-app.vercel.app
+const allowedOrigins = (process.env.CORS_ORIGIN || '')
+  .split(',')
+  .map((origin) => origin.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : true }));
+ 
 app.use(express.json());
-
+ 
+// A simple page so you can see the server is awake.
+app.get('/', (req, res) => {
+  res.send('Divine Grace AMC System API is running.');
+});
+ 
 app.get('/api/health', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT COUNT(*) AS total_users FROM users');
@@ -34,7 +50,7 @@ app.get('/api/health', async (req, res) => {
     res.status(500).json({ status: 'error', message: err.message });
   }
 });
-
+ 
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/payments', paymentRoutes);
@@ -43,26 +59,23 @@ app.use('/api/assets', assetRoutes);
 app.use('/api/contracts', contractRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/visits', visitRoutes);
-app.use('/api/dashboard',dashboardRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/invoices', invoiceRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/maintenance', maintenanceRoutes);
-
-
-
-
-
+ 
 app.get('/api/me', verifyToken, (req, res) => {
   res.json({ user: req.user });
 });
-
+ 
 app.get('/api/admin-only', verifyToken, requireRole('admin'), (req, res) => {
   res.json({ message: 'Welcome, admin!' });
 });
-
+ 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
+ 
