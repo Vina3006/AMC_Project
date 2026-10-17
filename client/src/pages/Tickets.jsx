@@ -122,7 +122,12 @@ export default function Tickets() {
                       {t.ticket_number}
                     </Link>
                   </td>
-                  <td className="px-4 py-3">{t.title}</td>
+                  <td className="px-4 py-3">
+  {t.title}
+  {t.ticket_type === "preventive" && (
+    <span className="ml-2 rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-700">Preventive</span>
+  )}
+</td>
                   {isStaff && <td className="px-4 py-3">{t.client_name}</td>}
                   <td className="px-4 py-3">
                     {t.asset_type}

@@ -167,6 +167,7 @@ export default function TicketDetail() {
     ["Due by (SLA)", formatDateTime(ticket.due_at)],
     ["Technician", ticket.technician_name || "Not assigned yet"],
     ["Resolved on", formatDateTime(ticket.resolved_at)],
+    ["Type", ticket.ticket_type === "preventive" ? "Preventive maintenance" : "Repair request"],
   ];
  
   return (

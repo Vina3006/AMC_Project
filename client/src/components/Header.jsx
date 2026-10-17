@@ -38,7 +38,7 @@ export default function Header() {
               to="/login"
               className="rounded-md bg-[#0b4a34] px-4 py-2 font-medium text-white hover:bg-[#083a29]"
             >
-              Customer Login
+               Login
             </Link>
           )}
         </nav>

@@ -16,10 +16,10 @@ const invoiceRoutes = require('./routes/invoiceRoutes');
 const reportRoutes = require('./routes/reportRoutes');
 const { verifyToken, requireRole } = require('./middleware/authMiddleware');
 const contactRoutes = require('./routes/contactRoutes');
+const maintenanceRoutes = require('./routes/maintenanceRoutes');
+const { startScheduler } = require('./services/maintenanceService');
 
-
-
-
+startScheduler();
 
 const app = express();
 app.use(cors());
@@ -48,7 +48,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/invoices', invoiceRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/contact', contactRoutes);
-
+app.use('/api/maintenance', maintenanceRoutes);
 
 
 

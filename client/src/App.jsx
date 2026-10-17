@@ -18,7 +18,7 @@ import Reports from './pages/Reports';
 import Contact from './pages/Contact';
 import ServicesAdmin from './pages/ServicesAdmin';
 import Messages from './pages/Messages';
- 
+import Maintenance from './pages/Maintenance';
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-100">
@@ -45,7 +45,7 @@ export default function App() {
           <Route path="/assets" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Assets /></ProtectedRoute>} />
           <Route path="/contracts" element={<ProtectedRoute roles={["admin", "staff", "customer"]}><Contracts /></ProtectedRoute>} />
           <Route path="/messages" element={<ProtectedRoute roles={["admin", "staff"]}><Messages /></ProtectedRoute>} />
- 
+          <Route path="/maintenance" element={<ProtectedRoute roles={["admin", "staff"]}><Maintenance /></ProtectedRoute>} />
           <Route path="/users" element={<ProtectedRoute roles={["admin"]}><Users /></ProtectedRoute>} />
           <Route path="/manage-services" element={<ProtectedRoute roles={["admin"]}><ServicesAdmin /></ProtectedRoute>} />
         </Route>
