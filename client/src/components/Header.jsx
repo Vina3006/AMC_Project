@@ -16,6 +16,12 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="leading-tight">
           <p className="text-xl font-bold text-[#0b4a34]">Divine Grace</p>
+          <img
+            src="/favicon.jpg"
+            alt="Divine Grace logo"
+            className="h-12 w-12 object-contain"
+          />
+
           <p className="text-xs text-slate-500">AMC System</p>
         </Link>
  
